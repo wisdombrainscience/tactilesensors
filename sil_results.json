@@ -1,0 +1,22 @@
+{
+ "compliant": {
+  "C_median_err": 0.08755729504552046,
+  "C_p95_err": 0.20692699661177208,
+  "C_within5": 100.0,
+  "C_median_settle": 0.42400000000000004,
+  "Py_median_err": 0.08364410106975839,
+  "Py_p95_err": 0.19846920084897585,
+  "Py_median_settle": 0.42100000000000004,
+  "reversed_trials": 30
+ },
+ "stiff": {
+  "C_median_err": 0.07817980024013829,
+  "C_p95_err": 0.21697414871635554,
+  "C_within5": 100.0,
+  "C_median_settle": 0.11699999999999999,
+  "Py_median_err": 0.08671903812421805,
+  "Py_p95_err": 0.23904748154339053,
+  "Py_median_settle": 0.11750000000000001,
+  "reversed_trials": 30
+ }
+}
