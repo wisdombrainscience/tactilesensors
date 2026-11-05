@@ -1,0 +1,242 @@
+--- 05_FreeRTOSv2_Velostat_Queue_FingerControl/Core/Src/main.c	2022-07-13 18:42:44.000000000 +0000
++++ v2/Core/Src/main.c	2026-11-05 12:55:29.307451001 +0000
+@@ -23,6 +23,12 @@
+ 
+ /* Private includes ----------------------------------------------------------*/
+ /* USER CODE BEGIN Includes */
++#ifdef GRASP_CTRL_V2
++#include "grasp_ctrl.h"
++#endif
++#ifdef TF_PACKED_FRAMES
++#include "tactile_frame.h"
++#endif
+ //#include "usbd_cdc_if.h"
+ #include <string.h>
+ #include "Scan_74238.h"
+@@ -577,9 +583,9 @@
+ 
+ 	/* USER CODE END TIM2_Init 1 */
+ 	htim2.Instance = TIM2;
+-	htim2.Init.Prescaler = 1440 - 1;
++	htim2.Init.Prescaler = (1440u / PWM_SCALE) - 1;
+ 	htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+-	htim2.Init.Period = 1000 - 1;
++	htim2.Init.Period = (1000u * PWM_SCALE) - 1;
+ 	htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 	htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+ 	if (HAL_TIM_Base_Init(&htim2) != HAL_OK) {
+@@ -636,9 +642,9 @@
+ 
+ 	/* USER CODE END TIM3_Init 1 */
+ 	htim3.Instance = TIM3;
+-	htim3.Init.Prescaler = 1440 - 1;
++	htim3.Init.Prescaler = (1440u / PWM_SCALE) - 1;
+ 	htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+-	htim3.Init.Period = 1000 - 1;
++	htim3.Init.Period = (1000u * PWM_SCALE) - 1;
+ 	htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 	htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+ 	if (HAL_TIM_Base_Init(&htim3) != HAL_OK) {
+@@ -695,9 +701,9 @@
+ 
+ 	/* USER CODE END TIM4_Init 1 */
+ 	htim4.Instance = TIM4;
+-	htim4.Init.Prescaler = 1440 - 1;
++	htim4.Init.Prescaler = (1440u / PWM_SCALE) - 1;
+ 	htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
+-	htim4.Init.Period = 1000 - 1;
++	htim4.Init.Period = (1000u * PWM_SCALE) - 1;
+ 	htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+ 	htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+ 	if (HAL_TIM_Base_Init(&htim4) != HAL_OK) {
+@@ -750,7 +756,11 @@
+ 
+ 	/* USER CODE END USART1_Init 1 */
+ 	huart1.Instance = USART1;
++	#ifdef TF_PACKED_FRAMES
++	huart1.Init.BaudRate = 921600;
++#else
+ 	huart1.Init.BaudRate = 115200;
++#endif
+ 	huart1.Init.WordLength = UART_WORDLENGTH_8B;
+ 	huart1.Init.StopBits = UART_STOPBITS_1;
+ 	huart1.Init.Parity = UART_PARITY_NONE;
+@@ -1056,8 +1066,17 @@
+ 				vPortFree(buf);
+ 
+ 			//transmit here
++#ifdef TF_PACKED_FRAMES
++			{
++				static uint8_t packed[TF_BYTES];
++				static uint8_t seq = 0u;
++				uint16_t n = tf_build(buffer + 1, seq++, packed);
++				HAL_UART_Transmit_DMA(&huart1, packed, n);
++			}
++#else
+ 			HAL_UART_Transmit_DMA(&huart1, (uint8_t*) buffer,
+ 			TxBufferSize * 2);
++#endif
+ 		}
+ 	}
+ 	/* USER CODE END StartVelostatTransmit */
+@@ -1077,8 +1096,8 @@
+ 		Error_Handler();
+ 	vServoInit(bot1, &htim2, TIM_CHANNEL_1, handEventHandle, FlagHandBot1);
+ 
+-	bot1->downLimit = 41u;
+-	bot1->upLimit = 66u;
++	bot1->downLimit = 41u * PWM_SCALE;
++	bot1->upLimit = 66u * PWM_SCALE;
+ 	bot1->isReverse = 0u;
+ 
+ 	vServoStart(bot1);
+@@ -1110,8 +1129,8 @@
+ 		Error_Handler();
+ 	vServoInit(top1, &htim2, TIM_CHANNEL_2, handEventHandle, FlagHandTop1);
+ 
+-	top1->downLimit = 28u;
+-	top1->upLimit = 84u;
++	top1->downLimit = 28u * PWM_SCALE;
++	top1->upLimit = 84u * PWM_SCALE;
+ 	top1->isReverse = 1u;
+ 
+ 	vServoStart(top1);
+@@ -1142,8 +1161,8 @@
+ 		Error_Handler();
+ 	vServoInit(bot2, &htim3, TIM_CHANNEL_1, handEventHandle, FlagHandBot2);
+ 
+-	bot2->downLimit = 45u;
+-	bot2->upLimit = 78u;
++	bot2->downLimit = 45u * PWM_SCALE;
++	bot2->upLimit = 78u * PWM_SCALE;
+ 	bot2->isReverse = 0u;
+ 
+ 	vServoStart(bot2);
+@@ -1174,8 +1193,8 @@
+ 		Error_Handler();
+ 	vServoInit(top2, &htim3, TIM_CHANNEL_2, handEventHandle, FlagHandTop2);
+ 
+-	top2->downLimit = 34u;
+-	top2->upLimit = 89u;
++	top2->downLimit = 34u * PWM_SCALE;
++	top2->upLimit = 89u * PWM_SCALE;
+ 	top2->isReverse = 0u;
+ 
+ 	vServoStart(top2);
+@@ -1206,8 +1225,8 @@
+ 		Error_Handler();
+ 	vServoInit(bot3, &htim4, TIM_CHANNEL_1, handEventHandle, FlagHandBot3);
+ 
+-	bot3->downLimit = 48u;
+-	bot3->upLimit = 75u;
++	bot3->downLimit = 48u * PWM_SCALE;
++	bot3->upLimit = 75u * PWM_SCALE;
+ 	bot3->isReverse = 1u;
+ 
+ 	vServoStart(bot3);
+@@ -1238,8 +1257,8 @@
+ 		Error_Handler();
+ 	vServoInit(top3, &htim4, TIM_CHANNEL_2, handEventHandle, FlagHandTop3);
+ 
+-	top3->downLimit = 45u;
+-	top3->upLimit = 108u;
++	top3->downLimit = 45u * PWM_SCALE;
++	top3->upLimit = 108u * PWM_SCALE;
+ 	top3->isReverse = 1u;
+ 
+ 	vServoStart(top3);
+@@ -1417,6 +1436,30 @@
+ ////		maxTop = uMyArrayFindMax(topArray);
+ ////		maxPalm = uMyArrayFindMax(palmArray);
+ 
++#ifdef GRASP_CTRL_V2
++		{
++			/* per-finger conductance-domain PI regulation (grasp_ctrl.c) */
++			static grasp_ctrl_t gc[3];
++			static uint8_t gcActive = 0u;
++			Servo *bot[3] = { bot1, bot2, bot3 };
++			uint16_t pp[3] = { maxBot1, maxBot2, maxBot3 };
++			uint16_t pd[3] = { maxTop1, maxTop2, maxTop3 };
++			if (!gcActive) {          /* first frame after enabling: initialise */
++				for (int f = 0; f < 3; f++) {
++					uint16_t open = bot[f]->isReverse ? bot[f]->downLimit : bot[f]->upLimit;
++					uint16_t closed = bot[f]->isReverse ? bot[f]->upLimit : bot[f]->downLimit;
++					grasp_ctrl_init(&gc[f], open, closed, gc_level_to_target_mS(servoLevel));
++					grasp_ctrl_start(&gc[f], pp[f] > pd[f] ? pp[f] : pd[f]);
++					vServoStop1(bot[f]);   /* servo task stops ramping; we drive CCR */
++				}
++				gcActive = 1u;
++			}
++			for (int f = 0; f < 3; f++)
++				*bot[f]->CCRx = grasp_ctrl_update(&gc[f], pp[f], pd[f]);
++			if ((osEventFlagsGet(handEventHandle) & FlagHandPeakControlEnable) == 0u)
++				gcActive = 0u;
++		}
++#else
+ 		threshHoldValue = threshHold[servoLevel] * 2u;
+ 		//
+ 		if ((flag12 == 0)
+@@ -1467,7 +1510,7 @@
+ 			else if (maxBot3 < temp && maxTop3 < temp)
+ 				vServoMove1(bot3, eServoDown1);
+ 		}
+-
++#endif
+ 	}
+ 	/* USER CODE END StartHandPeakControl */
+ }
+diff -ruN --strip-trailing-cr 05_FreeRTOSv2_Velostat_Queue_FingerControl/Servo/Inc/Servo.h v2/Servo/Inc/Servo.h
+--- 05_FreeRTOSv2_Velostat_Queue_FingerControl/Servo/Inc/Servo.h	2022-07-10 21:50:20.000000000 +0000
++++ v2/Servo/Inc/Servo.h	2026-11-05 12:55:22.604799514 +0000
+@@ -11,6 +11,13 @@
+ #include "stm32f1xx_hal.h"
+ #include "cmsis_os.h"
+ 
++/* GRASP_CTRL_V2: timers run at 1 MHz (1 us/count) instead of 50 kHz (20 us/count).
++ * All limits/steps received from the GUI keep their 20-us units and are scaled here. */
++#ifdef GRASP_CTRL_V2
++#define PWM_SCALE 20u
++#else
++#define PWM_SCALE 1u
++#endif
+ #define Head			0xAAu
+ #define Tail			0x55u
+ 
+@@ -26,12 +33,12 @@
+ 
+ typedef struct {
+ 	//command
+-	uint8_t step;
++	uint16_t step;
+ 	uint8_t delay;
+ 	eServoCommand command;
+ 	//setup
+-	uint8_t downLimit;
+-	uint8_t upLimit;
++	uint16_t downLimit;
++	uint16_t upLimit;
+ 	uint8_t isReverse;
+ 	//
+ 	TIM_HandleTypeDef *htim;
+diff -ruN --strip-trailing-cr 05_FreeRTOSv2_Velostat_Queue_FingerControl/Servo/Src/Servo.c v2/Servo/Src/Servo.c
+--- 05_FreeRTOSv2_Velostat_Queue_FingerControl/Servo/Src/Servo.c	2022-07-11 02:11:18.000000000 +0000
++++ v2/Servo/Src/Servo.c	2026-11-05 12:55:22.604899403 +0000
+@@ -153,7 +153,7 @@
+ void vServoUpdateCommand(Servo *servo, uint8_t *rxData, uint8_t offset) {
+ 	osEventFlagsClear(servo->event, servo->flag);
+ 
+-	servo->step = rxData[offset];
++	servo->step = (uint16_t)(rxData[offset] * PWM_SCALE);
+ 	servo->delay = rxData[offset + 1];
+ 	servo->command = (eServoCommand) rxData[offset + 2];
+ 
+@@ -187,7 +187,7 @@
+ 
+ 	servo->command = eServoStop;
+ 
+-	servo->downLimit = rxData[offset];
+-	servo->upLimit = rxData[offset + 1];
++	servo->downLimit = (uint16_t)(rxData[offset] * PWM_SCALE);
++	servo->upLimit = (uint16_t)(rxData[offset + 1] * PWM_SCALE);
+ 	servo->isReverse = rxData[offset + 2];
+ }
