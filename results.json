@@ -1,0 +1,609 @@
+{
+ "inferred_R_full_grasp_ohm": 2081.845818773171,
+ "inferred_R_rest_ohm": 34930.97543763704,
+ "span_counts_vs_Rpd": {
+  "470": 656,
+  "1000": 1140,
+  "2200": 1752,
+  "3300": 2035,
+  "4700": 2223,
+  "8200": 2359,
+  "12000": 2323,
+  "22000": 2062
+ },
+ "ghost_counts_vs_Rpd": {
+  "470": 15,
+  "1000": 43,
+  "2200": 108,
+  "3300": 158,
+  "4700": 214,
+  "8200": 314,
+  "12000": 384,
+  "22000": 465
+ },
+ "ghost": {
+  "diode_floating": {
+   "ghost_excess_counts": 43.0,
+   "pressed_err_counts": 13.333333333333314,
+   "single_press_counts": 429.0,
+   "rest_counts": 100.0
+  },
+  "grounded_rows": {
+   "ghost_excess_counts": -4.0,
+   "pressed_err_counts": -19.333333333333314,
+   "single_press_counts": 364.0,
+   "rest_counts": 53.0
+  },
+  "zero_potential": {
+   "ghost_excess_counts": -2.0,
+   "pressed_err_counts": -7.333333333333371,
+   "single_press_counts": 920.0,
+   "rest_counts": 122.0
+  }
+ },
+ "grasp_image_error": {
+  "diode_floating": {
+   "levels": [
+    0.1,
+    0.25,
+    0.4,
+    0.55,
+    0.7,
+    0.85,
+    1.0
+   ],
+   "rms": [
+    2.7,
+    2.97,
+    3.64,
+    4.73,
+    6.09,
+    7.61,
+    9.19
+   ],
+   "ghost": [
+    2.84,
+    2.89,
+    2.88,
+    2.89,
+    5.52,
+    8.47,
+    11.57
+   ]
+  },
+  "grounded_rows": {
+   "levels": [
+    0.1,
+    0.25,
+    0.4,
+    0.55,
+    0.7,
+    0.85,
+    1.0
+   ],
+   "rms": [
+    10.66,
+    11.23,
+    12.12,
+    13.38,
+    14.93,
+    16.7,
+    18.65
+   ],
+   "ghost": [
+    10.81,
+    11.2,
+    11.62,
+    12.05,
+    12.6,
+    12.92,
+    13.26
+   ]
+  },
+  "zero_potential": {
+   "levels": [
+    0.1,
+    0.25,
+    0.4,
+    0.55,
+    0.7,
+    0.85,
+    1.0
+   ],
+   "rms": [
+    0.24,
+    0.26,
+    0.3,
+    0.35,
+    0.41,
+    0.5,
+    0.61
+   ],
+   "ghost": [
+    0.32,
+    0.33,
+    0.38,
+    0.42,
+    0.48,
+    0.53,
+    0.6
+   ]
+  }
+ },
+ "throughput": {
+  "t_conv_us": 21.0,
+  "t_row_us": 104.99999999999999,
+  "t_adc_ms": 4.62,
+  "t_adc_single_adc_ms": 9.24,
+  "rows": [
+   {
+    "link": "legacy frame, UART 115.2 kbaud",
+    "bytes": 884,
+    "t_tx_ms": 76.73611111111111,
+    "t_adc_ms": 4.62,
+    "fps": 13.031674208144796
+   },
+   {
+    "link": "packed frame, UART 115.2 kbaud",
+    "bytes": 665,
+    "t_tx_ms": 57.72569444444445,
+    "t_adc_ms": 4.62,
+    "fps": 17.32330827067669
+   },
+   {
+    "link": "packed frame, UART 921.6 kbaud",
+    "bytes": 665,
+    "t_tx_ms": 7.215711805555556,
+    "t_adc_ms": 4.62,
+    "fps": 138.58646616541353
+   },
+   {
+    "link": "packed frame, USB-CDC FS (~0.8 MB/s)",
+    "bytes": 665,
+    "t_tx_ms": 0.8312499999999999,
+    "t_adc_ms": 4.62,
+    "fps": 216.45021645021646
+   }
+  ]
+ },
+ "traces": {
+  "bottle_full": {
+   "peak_proximal": {
+    "mean": 792.1,
+    "sd": 3.9
+   },
+   "peak_distal": {
+    "mean": 946.6,
+    "sd": 3.9
+   },
+   "peak_palm": {
+    "mean": 647.2,
+    "sd": 9.5
+   }
+  },
+  "bottle_level7": {
+   "peak_proximal": {
+    "mean": 731.6,
+    "sd": 3.4
+   },
+   "peak_distal": {
+    "mean": 749.6,
+    "sd": 1.9
+   },
+   "peak_palm": {
+    "mean": 723.0,
+    "sd": 8.5
+   },
+   "rel_err_proximal_pct": 4.5
+  },
+  "snack_full": {
+   "peak_proximal": {
+    "mean": 980.7,
+    "sd": 2.6
+   },
+   "peak_distal": {
+    "mean": 1248.4,
+    "sd": 2.5
+   },
+   "peak_palm": {
+    "mean": 588.1,
+    "sd": 2.2
+   }
+  },
+  "snack_level6": {
+   "peak_proximal": {
+    "mean": 611.6,
+    "sd": 2.0
+   },
+   "peak_distal": {
+    "mean": 463.3,
+    "sd": 3.4
+   },
+   "peak_palm": {
+    "mean": 592.0,
+    "sd": 4.5
+   },
+   "rel_err_proximal_pct": 1.9
+  }
+ },
+ "grasp_mc": {
+  "Original (as built): 13 Hz frames, 20 us PWM": {
+   "compliant (k = 0.04-0.08)": {
+    "median_abs_err_pct": 10.50442031668904,
+    "p95_abs_err_pct": 24.230865596005792,
+    "within_5pct": 21.666666666666668,
+    "median_overshoot_pct": 10.504420316689032,
+    "median_settle_s": 0.805
+   },
+   "stiff (k = 0.15-0.30)": {
+    "median_abs_err_pct": 16.81267217128606,
+    "p95_abs_err_pct": 96.72649828619383,
+    "within_5pct": 18.333333333333332,
+    "median_overshoot_pct": 36.295479564358736,
+    "median_settle_s": 0.3579999999999999
+   }
+  },
+  "Original logic, 200 Hz frames": {
+   "compliant (k = 0.04-0.08)": {
+    "median_abs_err_pct": 2.8324529693392777,
+    "p95_abs_err_pct": 7.474653136959675,
+    "within_5pct": 78.33333333333333,
+    "median_overshoot_pct": 1.1710751660578071,
+    "median_settle_s": 0.7080000000000001
+   },
+   "stiff (k = 0.15-0.30)": {
+    "median_abs_err_pct": 20.322808492050523,
+    "p95_abs_err_pct": 44.535661007039835,
+    "within_5pct": 0.0,
+    "median_overshoot_pct": 14.407471706113899,
+    "median_settle_s": null
+   }
+  },
+  "Proposed PI, 13 Hz frames, 20 us PWM": {
+   "compliant (k = 0.04-0.08)": {
+    "median_abs_err_pct": 0.9562425043643719,
+    "p95_abs_err_pct": 3.958694880058265,
+    "within_5pct": 96.66666666666667,
+    "median_overshoot_pct": 2.03644381048427,
+    "median_settle_s": 3.391
+   },
+   "stiff (k = 0.15-0.30)": {
+    "median_abs_err_pct": 1.0126681981676975,
+    "p95_abs_err_pct": 3.6933640465544557,
+    "within_5pct": 100.0,
+    "median_overshoot_pct": 60.85600218151684,
+    "median_settle_s": 7.040000000000001
+   }
+  },
+  "Proposed PI, 200 Hz frames, 1 us PWM": {
+   "compliant (k = 0.04-0.08)": {
+    "median_abs_err_pct": 0.07075541006632488,
+    "p95_abs_err_pct": 0.24475168005924458,
+    "within_5pct": 100.0,
+    "median_overshoot_pct": 0.29373813448377367,
+    "median_settle_s": 0.42400000000000004
+   },
+   "stiff (k = 0.15-0.30)": {
+    "median_abs_err_pct": 0.09020613848997527,
+    "p95_abs_err_pct": 0.2519588313393226,
+    "within_5pct": 100.0,
+    "median_overshoot_pct": 0.8183542911716264,
+    "median_settle_s": 0.10300000000000001
+   }
+  }
+ },
+ "yolo_log": {
+  "epochs": 50,
+  "best_epoch": 48,
+  "P": 0.98694,
+  "Rc": 1.0,
+  "mAP50": 0.995,
+  "mAP5095": 0.58912
+ },
+ "uncertainty": {
+  "sources": {
+   "ADC quantisation": "1 LSB uniform",
+   "read noise (measured SD)": "2-4 counts steady state",
+   "diode drop, temperature": "-2 mV/K, +/-10 K",
+   "diode drop, part spread": "+/-20 mV",
+   "pull-down tolerance": "1 %"
+  },
+  "rel_pct": {
+   "light (300)": {
+    "ADC quantisation": 0.1043640343568426,
+    "read noise (measured SD)": 1.084583628688168,
+    "diode drop, temperature": 0.40399640127241215,
+    "diode drop, part spread": 0.40399640127241215,
+    "pull-down tolerance": 0.5773695148401201,
+    "combined (RSS)": 1.359042030414978,
+    "expanded, k = 2": 2.718084060829956
+   },
+   "medium (700)": {
+    "ADC quantisation": 0.050412861571887665,
+    "read noise (measured SD)": 0.523906297335708,
+    "diode drop, temperature": 0.4553514127443419,
+    "diode drop, part spread": 0.4553514127443419,
+    "pull-down tolerance": 0.5773695148401269,
+    "combined (RSS)": 1.0124547594056423,
+    "expanded, k = 2": 2.0249095188112847
+   },
+   "firm (1200)": {
+    "ADC quantisation": 0.034962758216502236,
+    "read noise (measured SD)": 0.36334410408053514,
+    "diode drop, temperature": 0.5413746964959952,
+    "diode drop, part spread": 0.5413746964959952,
+    "pull-down tolerance": 0.5773695148401297,
+    "combined (RSS)": 1.0260458143334443,
+    "expanded, k = 2": 2.0520916286668887
+   }
+  },
+  "note": "supply and ADC reference share the 3.3 V rail, so Vs/Vref errors cancel ratiometrically"
+ },
+ "deghost": {
+  "noises": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   6
+  ],
+  "load_1_0": [
+   [
+    9.19,
+    0.18,
+    0.61,
+    11.57,
+    0.41,
+    0.6
+   ],
+   [
+    9.19,
+    0.45,
+    0.62,
+    11.52,
+    1.32,
+    0.79
+   ],
+   [
+    9.22,
+    0.83,
+    0.66,
+    11.41,
+    2.63,
+    1.07
+   ],
+   [
+    9.22,
+    1.23,
+    0.72,
+    11.35,
+    4.19,
+    1.47
+   ],
+   [
+    9.23,
+    1.64,
+    0.78,
+    12.01,
+    5.41,
+    1.76
+   ],
+   [
+    9.26,
+    2.43,
+    0.97,
+    12.11,
+    7.17,
+    2.86
+   ]
+  ],
+  "load_0_4": [
+   [
+    3.64,
+    0.13,
+    0.3,
+    2.88,
+    0.36,
+    0.38
+   ],
+   [
+    3.64,
+    0.39,
+    0.33,
+    3.15,
+    1.18,
+    0.65
+   ],
+   [
+    3.65,
+    0.73,
+    0.39,
+    3.59,
+    2.41,
+    0.98
+   ],
+   [
+    3.65,
+    1.16,
+    0.48,
+    4.01,
+    3.57,
+    1.35
+   ],
+   [
+    3.69,
+    1.42,
+    0.59,
+    4.34,
+    4.83,
+    1.74
+   ],
+   [
+    3.79,
+    2.15,
+    0.82,
+    5.34,
+    6.37,
+    2.47
+   ]
+  ],
+  "cols": [
+   "rms_raw",
+   "rms_deghost",
+   "rms_zp",
+   "maxunl_raw",
+   "maxunl_deghost",
+   "maxunl_zp"
+  ],
+  "convergence_rms_counts": [
+   25.52,
+   12.57,
+   8.2,
+   5.41,
+   3.58,
+   2.39,
+   1.62,
+   1.09,
+   0.8,
+   0.6,
+   0.42,
+   0.27,
+   0.21,
+   0.16,
+   0.13,
+   0.08,
+   0.07,
+   0.07,
+   0.05,
+   0.0
+  ],
+  "runtime_s_python": 0.2415485380000746
+ },
+ "fusion": {
+  "N": 300,
+  "classes": {
+   "canister": {
+    "T": 500,
+    "k": [
+     0.05,
+     0.08
+    ]
+   },
+   "mouthwash": {
+    "T": 400,
+    "k": [
+     0.06,
+     0.1
+    ]
+   },
+   "water": {
+    "T": 300,
+    "k": [
+     0.04,
+     0.07
+    ]
+   }
+  },
+  "detector": {
+   "p_correct": 0.9523809523809523,
+   "p_confuse": 0.023809523809523808,
+   "p_miss": 0.023809523809523808
+  },
+  "summary": {
+   "vision_only": {
+    "success_pct": 27.666666666666668,
+    "median_abs_err_pct": 18.394481007306823,
+    "p90_abs_err_pct": 36.80979232425864,
+    "per_class_success": {
+     "canister": 38.63636363636363,
+     "mouthwash": 24.0,
+     "water": 22.321428571428573
+    }
+   },
+   "touch_only": {
+    "success_pct": 33.33333333333333,
+    "median_abs_err_pct": 20.038895244412615,
+    "p90_abs_err_pct": 33.437878833256086,
+    "per_class_success": {
+     "canister": 0.0,
+     "mouthwash": 100.0,
+     "water": 0.0
+    }
+   },
+   "fused": {
+    "success_pct": 98.0,
+    "median_abs_err_pct": 0.11059638832668951,
+    "p90_abs_err_pct": 0.2655155216100786,
+    "per_class_success": {
+     "canister": 98.86363636363636,
+     "mouthwash": 100.0,
+     "water": 95.53571428571429
+    }
+   }
+  }
+ },
+ "fusion_det_events": {
+  "ok": 292,
+  "confused": 1,
+  "missed": 7
+ },
+ "detector_reeval": {
+  "note": "re-evaluated with YOLOv5 v6.1 val.py on the 84-image validation split found on disk (2 labelled classes: khoaitay 45, nuocmuoi 49; no nuocsuoi labels)",
+  "dataset_on_disk": {
+   "train_images": 756,
+   "train_sources": 252,
+   "aug_per_source": 3,
+   "val_images": 84,
+   "val_sources": 84,
+   "shared_sources": 0,
+   "val_with_adjacent_train_shot_pm1": 77,
+   "val_with_adjacent_train_shot_pm3": 84
+  },
+  "best1_deployed": {
+   "arch": "YOLOv5n (0.33/0.25), 1.77M params, nc=3, saved 2022-06-09",
+   "P": 0.792,
+   "R": 0.932,
+   "mAP50": 0.889,
+   "mAP5095": 0.296,
+   "per_class": {
+    "khoaitay": [
+     0.744,
+     0.905,
+     0.854,
+     0.273
+    ],
+    "nuocmuoi": [
+     0.839,
+     0.959,
+     0.924,
+     0.319
+    ]
+   },
+   "cpu_batch1_ms_median": 20.3,
+   "cpu_batch1_ms_p95": 21.7
+  },
+  "best_s": {
+   "arch": "YOLOv5s (0.33/0.50), 7.03M params, nc=3, saved 2022-06-05",
+   "P": 0.857,
+   "R": 0.959,
+   "mAP50": 0.948,
+   "mAP5095": 0.28,
+   "cpu_batch1_ms_median": 65.8
+  },
+  "finding": "predicted boxes systematically larger than on-disk labels -> weights trained on a different label set than the dataset on disk; thesis Table 5.1 cannot be reproduced from available files",
+  "cpu": "2-vCPU cloud container, PyTorch CPU, 416 px"
+ },
+ "interface_level_map": {
+  "nuocsuoi (water)": 3,
+  "nuocmuoi (mouthwash)": 4,
+  "khoaitay (canister)": 5,
+  "source": "DetectObjectForm.cs port2_DataReceived"
+ },
+ "bom": {
+  "central_board_vnd": 325520,
+  "driver_board_vnd": 159180,
+  "whole_project_vnd": 2500000,
+  "source": "thesis Tables 4.1-4.2; whole-project total stated by authors"
+ }
+}
